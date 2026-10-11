@@ -4,7 +4,7 @@ Repository giới thiệu bộ dữ liệu được chọn cho đồ án cuối 
 
 ## 1. Giới thiệu dữ liệu
 
-Dự án sử dụng file [`movies_metadata.csv`](movies_metadata.csv) thuộc **The Movies Dataset**, do **Rounak Banik** công bố trên [Kaggle](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset). Theo mô tả của tác giả, thông tin phim được thu thập qua TMDB API; bộ dữ liệu tổng thể còn kết hợp dữ liệu liên kết và đánh giá từ GroupLens/MovieLens.
+Dự án sử dụng file [`movies_metadata.csv`](movies_metadata.csv) thuộc **The Movies Dataset**, do **Rounak Banik** công bố trên [Kaggle, mục movies_metadata.csv](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset/data?select=movies_metadata.csv). Theo mô tả của tác giả, thông tin phim được thu thập qua TMDB API; bộ dữ liệu tổng thể còn kết hợp dữ liệu liên kết và đánh giá từ GroupLens/MovieLens.
 
 Phạm vi hiện tại chỉ sử dụng **metadata của phim**, chưa sử dụng các file diễn viên, đoàn làm phim hay lịch sử chấm điểm của từng người dùng trong bộ dữ liệu đầy đủ.
 
@@ -17,7 +17,21 @@ Phạm vi hiện tại chỉ sử dụng **metadata của phim**, chưa sử d�
 | Nguồn metadata | The Movie Database (TMDB) |
 | Giấy phép được ghi trên Kaggle | **CC0: Public Domain** |
 
-Repository ghi rõ nguồn và tác giả để phục vụ việc trích dẫn trong đồ án. Có thể xem nhãn giấy phép trên [trang dữ liệu](https://www.kaggle.com/rounakbanik/the-movies-dataset/kernels).
+### Giấy phép và mục đích sử dụng
+
+Trang công bố trên [Kaggle](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset) ghi **CC0: Public Domain**. Theo [Creative Commons CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), người dùng được sao chép, chỉnh sửa và phân phối tác phẩm thuộc phạm vi CC0 mà không cần xin phép, kể cả cho mục đích thương mại. **Vì vậy, theo giấy phép do tác giả công bố, bộ dữ liệu phù hợp để sử dụng cho mục đích học tập, nghiên cứu và phân tích trong đồ án này.**
+
+Nhóm vẫn ghi rõ tác giả, nguồn Kaggle và nguồn metadata TMDB để bảo đảm khả năng truy xuất và trích dẫn học thuật. CC0 không bảo đảm dữ liệu chính xác hoặc sạch hoàn toàn, và không tự động xóa bỏ các quyền của bên thứ ba. Phạm vi đồ án là phân tích file metadata; nhãn giấy phép này không được dùng để suy rộng quyền sử dụng mọi ảnh poster hoặc nội dung bên ngoài được liên kết trong file.
+
+### Đối chiếu file với nguồn
+
+Ngày **11/10/2026**, file trong repository đã được so sánh với `movies_metadata.csv` tải trực tiếp từ Kaggle: **hai file khớp hoàn toàn từng byte**, cùng mã SHA-256:
+
+```text
+37ec322786b136a24604564e55160be75f8937546f11cb1a990076971fa895fd
+```
+
+Các bản ghi trùng và dòng bất thường được nêu bên dưới cũng xuất hiện trong bản tải từ Kaggle. Đây là đặc điểm của dữ liệu nguồn tại thời điểm kiểm tra, không phải lỗi phát sinh do tải file. File CSV gốc được giữ nguyên; các bước làm sạch sẽ được thực hiện và giải thích trong notebook.
 
 ### Các thuộc tính
 
@@ -52,7 +66,7 @@ Repository ghi rõ nguồn và tác giả để phục vụ việc trích dẫn 
 
 | Yêu cầu trong đề bài | Cách bộ dữ liệu hỗ trợ |
 | --- | --- |
-| Chọn dữ liệu công khai; nêu chủ đề, nguồn, giấy phép và cách thu thập | Có trang công bố trên Kaggle, tác giả, nhãn giấy phép và mô tả nguồn TMDB/GroupLens |
+| Chọn dữ liệu công khai; nêu chủ đề, nguồn, giấy phép và cách thu thập | Có trang công bố trên Kaggle, tác giả, giấy phép CC0 phù hợp cho học tập/nghiên cứu và mô tả nguồn TMDB/GroupLens |
 | Khám phá số dòng/cột, ý nghĩa bản ghi, kiểu dữ liệu và dữ liệu trùng | File gồm 45.466 dòng, 24 cột với nhiều kiểu thuộc tính; cần kiểm tra trùng cả theo toàn bộ dòng và mã phim |
 | Khảo sát phân phối, giá trị thiếu và bất thường của biến số/phân loại | Có thể phân tích ngân sách, doanh thu, thời lượng, điểm đánh giá, thể loại và ngôn ngữ |
 | Đặt câu hỏi có ý nghĩa, cần nhiều bước để trả lời | Có thể kết hợp lọc dữ liệu, tạo biến, phân nhóm và trực quan hóa để nghiên cứu các mối liên hệ |
@@ -66,13 +80,16 @@ Repository ghi rõ nguồn và tác giả để phục vụ việc trích dẫn 
 
 Kiểm tra sơ bộ trực tiếp trên file CSV bằng pandas cho thấy:
 
-- Có **17 dòng trùng hoàn toàn** và **30 lần lặp `id` sau lần xuất hiện đầu tiên**. Cần kiểm tra nội dung trước khi quyết định gộp hoặc loại bỏ.
+- Có **17 bản ghi dư do trùng hoàn toàn cả 24 cột với bản ghi đã xuất hiện trước đó**, theo `movies.duplicated().sum()`, chiếm khoảng **0,037%** tổng số dòng. Ví dụ, có bản ghi lặp của *The Promise* (`id=105045`) và *Le Samouraï* (`id=5511`). Con số 17 là số lần lặp dư, không phải số phim có cùng tên. Nếu chỉ bỏ các bản sao giống hoàn toàn bằng `drop_duplicates()`, dữ liệu còn **45.449 dòng**.
+- Khi chỉ xét `id`, có **30 lần lặp sau lần xuất hiện đầu tiên**. Con số này **đã bao gồm** các dòng trùng hoàn toàn, không cộng thêm 17 thành 47. Những dòng cùng mã phim nhưng khác thuộc tính cần được đối chiếu trước khi chọn bản ghi giữ lại.
 - `runtime` thiếu **263** giá trị, `overview` thiếu **954** giá trị và `release_date` thiếu **87** giá trị.
-- Có **3 dòng có `id` mang dạng ngày tháng**, đồng thời `budget` không chuyển được sang số. Cần kiểm tra các dòng sai cấu trúc này.
+- Có **3 dòng có dấu hiệu lệch cột**, chiếm khoảng **0,0066%**: `id` chứa ngày tháng, `budget` chứa đường dẫn ảnh `.jpg`, còn `title` bị thiếu. Chúng nằm tại index pandas **19730, 29503 và 35587** (đếm từ 0, không phải số dòng văn bản trong CSV). Cần kiểm tra riêng; nếu không khôi phục được đáng tin cậy thì loại khỏi tập phân tích và ghi rõ lý do, không tự đoán giá trị thay thế.
 - `budget` có **36.573** giá trị bằng 0 và `revenue` có **38.052** giá trị bằng 0. Không nên mặc định chúng đều là ngân sách/doanh thu thực bằng 0; khi phân tích tài chính cần nêu rõ cách xử lý và số bản ghi còn lại.
 - Các cột như `genres`, `production_companies` và `spoken_languages` lưu danh sách dưới dạng chuỗi, cần chuyển đổi trước khi phân nhóm.
 
 Với ngày phát hành, cần kiểm tra giá trị hợp lệ và mốc thời gian phân tích. Điểm đánh giá phải được xem cùng số lượt đánh giá; các kết quả trên tập phim có đủ ngân sách/doanh thu có thể không đại diện cho toàn bộ dữ liệu.
+
+**Đánh giá mức độ phù hợp:** Bản ghi trùng, giá trị thiếu và lỗi kiểu dữ liệu là những vấn đề thường gặp khi làm việc với dữ liệu thực tế. Số bản ghi trùng hoàn toàn và số dòng lệch cột ở đây rất nhỏ, có thể xử lý minh bạch và không phải lý do để loại bỏ toàn bộ dataset. Chúng cũng phù hợp với yêu cầu khám phá và tiền xử lý trong đề bài. Hạn chế đáng chú ý hơn là độ đầy đủ của dữ liệu tài chính: trên file gốc, chỉ **5.381 dòng có cả `budget > 0` và `revenue > 0`**, trước khi xử lý trùng và các vấn đề khác. Vì vậy, câu hỏi về ngân sách/doanh thu cần báo cáo số mẫu còn lại và giới hạn kết luận; các câu hỏi về thể loại, thời lượng và đánh giá vẫn có thể sử dụng những tập bản ghi phù hợp riêng.
 
 ## 4. Câu hỏi phân tích dự kiến
 
@@ -112,6 +129,7 @@ Notebook sẽ được triển khai theo các mục: thu thập dữ liệu, kh�
 ## Tài liệu tham khảo
 
 - Rounak Banik, [The Movies Dataset trên Kaggle](https://www.kaggle.com/datasets/rounakbanik/the-movies-dataset): nguồn dữ liệu, mô tả thu thập và giấy phép.
+- Creative Commons, [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/): giải thích quyền sao chép, chỉnh sửa và phân phối theo CC0.
 - [The Movie Database (TMDB)](https://www.themoviedb.org/): nguồn metadata phim.
 - [GroupLens MovieLens](https://grouplens.org/datasets/movielens/): nguồn MovieLens được tác giả sử dụng trong bộ dữ liệu tổng thể.
 - **Final Project.pdf**, tài liệu yêu cầu đồ án do giảng viên cung cấp: phần Collecting data, Exploring data, Asking meaningful questions, Preprocessing + analyzing data, Reflection, References và Teamwork.
