@@ -11,19 +11,20 @@ Theo mô tả của người đăng, bộ dữ liệu kết hợp metadata TMDB 
 | Đặc điểm | Nội dung |
 | --- | --- |
 | File sử dụng | `TMDB  IMDB Movies Dataset.csv` (hai dấu cách giữa TMDB và IMDB) |
-| Quy mô bản CSV đang sử dụng | **442.841 dòng, 29 cột**, trước khi làm sạch |
-| Dung lượng | **281.584.854 byte**, khoảng **281,6 MB** |
+| Quy mô bản CSV đang sử dụng | **443.656 bản ghi, 29 cột**, không tính dòng tiêu đề, trước khi làm sạch |
+| Dung lượng | **282.010.663 byte**, khoảng **282,0 MB** (1 MB = 1.000.000 byte) |
+| Ngày tải bản dữ liệu đang sử dụng | **05/11/2026** |
 | Ý nghĩa mỗi dòng | Một bản ghi thông tin phim sau khi kết hợp hai nguồn; cần kiểm tra tính duy nhất của mã phim khi khám phá dữ liệu |
 | Định dạng | CSV |
 | Giấy phép công bố trên Kaggle | **CC BY-NC-SA 4.0** |
 
-Số dòng, cột và dung lượng được kiểm tra trực tiếp trên bản CSV của nhóm ngày **15/10/2026**. Quy mô này đáp ứng điều kiện **hơn 10.000 mẫu và hơn 10 thuộc tính** ở dữ liệu đầu vào. Số bản ghi sử dụng cho từng câu hỏi sẽ được báo cáo riêng sau tiền xử lý.
+Số bản ghi, cột và dung lượng được kiểm tra trực tiếp trên bản CSV của nhóm ngày **05/11/2026**. Ngày tải thể hiện thời điểm nhóm lấy bản dữ liệu, không phải ngày cập nhật của toàn bộ dữ liệu trên TMDB/IMDb. Quy mô này đáp ứng điều kiện **hơn 10.000 mẫu và hơn 10 thuộc tính** ở dữ liệu đầu vào. Số bản ghi sử dụng cho từng câu hỏi sẽ được báo cáo riêng sau tiền xử lý.
 
 ## 2. Tải dữ liệu
 
 **CSV có dung lượng lớn hơn 100 MB nên không được lưu trực tiếp trong repository này.** Nhóm cung cấp file qua Google Drive. Khi clone repo, cần tải CSV riêng trước khi chạy notebook.
 
-- **[Tải CSV từ Google Drive](https://drive.google.com/file/d/1H3NAZxyAqfqFD81NeKrg-sXyNj174Vw0/view?usp=sharing)** — bản dữ liệu do nhóm cung cấp để thực hiện đồ án.
+- **[Tải CSV từ Google Drive](https://drive.google.com/file/d/1g1Wy1l1x1INs0JDn8SZuHJy1GsFj5O8D/view?usp=sharing)** — bản dữ liệu nhóm tải ngày **05/11/2026** để thực hiện đồ án.
 - **[Trang nguồn trên Kaggle](https://www.kaggle.com/datasets/ggtejas/tmdb-imdb-merged-movies-dataset/data)** — mô tả dataset, nguồn gốc và giấy phép.
 
 Tải file về, đặt cùng thư mục với `README.md` và giữ tên `TMDB  IMDB Movies Dataset.csv`. Nếu tên file tải về khác, đổi tên cho khớp hoặc sửa đường dẫn khi đọc dữ liệu. CSV này đã được thêm vào `.gitignore` để tránh đưa file lớn lên GitHub.
@@ -77,7 +78,7 @@ Chủ đề phim ảnh gần gũi và có nhiều câu hỏi thực tế để k
 | Yêu cầu | Cách triển khai với dataset |
 | --- | --- |
 | Dữ liệu công khai, nêu nguồn, cách thu thập và giấy phép | Dẫn trang Kaggle, mô tả việc kết hợp TMDB/IMDb và trình bày điều kiện sử dụng |
-| Hơn 10.000 mẫu, hơn 10 thuộc tính | Bản CSV đang sử dụng có 442.841 dòng và 29 cột trước tiền xử lý |
+| Hơn 10.000 mẫu, hơn 10 thuộc tính | Bản CSV đang sử dụng có 443.656 bản ghi và 29 cột trước tiền xử lý |
 | Khám phá cấu trúc, kiểu dữ liệu, phân phối, giá trị thiếu và trùng | Kiểm tra mã phim, chuyển kiểu ngày/số, khảo sát biến tài chính, đánh giá và biến phân loại |
 | Đặt câu hỏi có ý nghĩa, cần nhiều bước để trả lời | Kết hợp lọc mẫu, tạo biến, phân nhóm, so sánh và trực quan hóa |
 | Tiền xử lý và phân tích bằng mô tả lẫn code | Trình bày lý do chọn cách xử lý và số mẫu còn lại cho từng câu hỏi trong notebook |
