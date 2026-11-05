@@ -10,7 +10,7 @@ Theo mô tả của người đăng, bộ dữ liệu kết hợp metadata TMDB 
 
 | Đặc điểm | Nội dung |
 | --- | --- |
-| File sử dụng | `TMDB  IMDB Movies Dataset.csv` (hai dấu cách giữa TMDB và IMDB) |
+| File sử dụng | `data/raw/TMDB  IMDB Movies Dataset.csv` (hai dấu cách giữa TMDB và IMDB) |
 | Quy mô bản CSV đang sử dụng | **443.656 bản ghi, 29 cột**, không tính dòng tiêu đề, trước khi làm sạch |
 | Dung lượng | **282.010.663 byte**, khoảng **282,0 MB** (1 MB = 1.000.000 byte) |
 | Ngày tải bản dữ liệu đang sử dụng | **05/11/2026** |
@@ -18,7 +18,7 @@ Theo mô tả của người đăng, bộ dữ liệu kết hợp metadata TMDB 
 | Định dạng | CSV |
 | Giấy phép công bố trên Kaggle | **CC BY-NC-SA 4.0** |
 
-Số bản ghi, cột và dung lượng được kiểm tra trực tiếp trên bản CSV của nhóm ngày **05/11/2026**. Ngày tải thể hiện thời điểm nhóm lấy bản dữ liệu, không phải ngày cập nhật của toàn bộ dữ liệu trên TMDB/IMDb. Quy mô này đáp ứng điều kiện **hơn 10.000 mẫu và hơn 10 thuộc tính** ở dữ liệu đầu vào. Số bản ghi sử dụng cho từng câu hỏi sẽ được báo cáo riêng sau tiền xử lý.
+Số bản ghi, cột và dung lượng được kiểm tra trực tiếp trên bản CSV của nhóm ngày **05/11/2026**. Ngày tải thể hiện thời điểm nhóm lấy bản dữ liệu, không phải ngày cập nhật của toàn bộ dữ liệu trên TMDB/IMDb. Quy mô này đáp ứng điều kiện **tối thiểu khoảng 3.000 dòng và 10 cột** trong đề. Số bản ghi sử dụng cho từng câu hỏi sẽ được báo cáo riêng sau tiền xử lý.
 
 ## 2. Tải dữ liệu
 
@@ -27,12 +27,14 @@ Số bản ghi, cột và dung lượng được kiểm tra trực tiếp trên 
 - **[Tải CSV từ Google Drive](https://drive.google.com/file/d/1g1Wy1l1x1INs0JDn8SZuHJy1GsFj5O8D/view?usp=sharing)** — bản dữ liệu nhóm tải ngày **05/11/2026** để thực hiện đồ án.
 - **[Trang nguồn trên Kaggle](https://www.kaggle.com/datasets/ggtejas/tmdb-imdb-merged-movies-dataset/data)** — mô tả dataset, nguồn gốc và giấy phép.
 
-Tải file về, đặt cùng thư mục với `README.md` và giữ tên `TMDB  IMDB Movies Dataset.csv`. Nếu tên file tải về khác, đổi tên cho khớp hoặc sửa đường dẫn khi đọc dữ liệu. CSV này đã được thêm vào `.gitignore` để tránh đưa file lớn lên GitHub.
+Tải file về, đặt trong `data/raw/` và giữ tên `TMDB  IMDB Movies Dataset.csv`. Nếu tên file tải về khác, đổi tên cho khớp hoặc sửa đường dẫn khi đọc dữ liệu. Dữ liệu trong `data/raw/` và `data/processed/` được Git ignore; chỉ các file `.gitkeep` được theo dõi để giữ cấu trúc thư mục. Giữ nguyên dữ liệu gốc trong `data/raw/`, lưu dữ liệu đã xử lý vào `data/processed/`.
+
+Ví dụ khi chạy từ thư mục gốc repository:
 
 ```python
 import pandas as pd
 
-movies = pd.read_csv("TMDB  IMDB Movies Dataset.csv", low_memory=False)
+movies = pd.read_csv("data/raw/TMDB  IMDB Movies Dataset.csv", low_memory=False)
 print(movies.shape)
 movies.head()
 ```
@@ -78,7 +80,7 @@ Chủ đề phim ảnh gần gũi và có nhiều câu hỏi thực tế để k
 | Yêu cầu | Cách triển khai với dataset |
 | --- | --- |
 | Dữ liệu công khai, nêu nguồn, cách thu thập và giấy phép | Dẫn trang Kaggle, mô tả việc kết hợp TMDB/IMDb và trình bày điều kiện sử dụng |
-| Hơn 10.000 mẫu, hơn 10 thuộc tính | Bản CSV đang sử dụng có 443.656 bản ghi và 29 cột trước tiền xử lý |
+| Tối thiểu khoảng 3.000 dòng, 10 cột | Bản CSV đang sử dụng có 443.656 bản ghi và 29 cột trước tiền xử lý |
 | Khám phá cấu trúc, kiểu dữ liệu, phân phối, giá trị thiếu và trùng | Kiểm tra mã phim, chuyển kiểu ngày/số, khảo sát biến tài chính, đánh giá và biến phân loại |
 | Đặt câu hỏi có ý nghĩa, cần nhiều bước để trả lời | Kết hợp lọc mẫu, tạo biến, phân nhóm, so sánh và trực quan hóa |
 | Tiền xử lý và phân tích bằng mô tả lẫn code | Trình bày lý do chọn cách xử lý và số mẫu còn lại cho từng câu hỏi trong notebook |
@@ -96,7 +98,7 @@ README giới thiệu dữ liệu và định hướng; các kết quả phân t
 | Cơ cấu thể loại và thời lượng phim thay đổi ra sao qua các giai đoạn? | Chuẩn hóa ngày, tạo biến thời gian, xử lý phim nhiều thể loại rồi so sánh phân phối |
 | Doanh thu và đánh giá khác nhau thế nào giữa các nhóm công ty sản xuất hoặc đạo diễn? | Chọn nhóm có đủ số phim, so sánh trong phạm vi ngân sách và giai đoạn tương đồng, tránh kết luận từ nhóm quá nhỏ |
 
-Nhóm sẽ điều chỉnh để có **ít nhất số câu hỏi bằng số thành viên**, ưu tiên chất lượng và ý nghĩa phân tích.
+Các câu hỏi trên là hướng tham khảo, chưa phải danh sách đã chốt. Theo đề, nhóm **2 người cần 4 câu hỏi**, mỗi người phụ trách **2 câu**, trong đó **ít nhất 1 câu dùng ML**. Nhóm cần điều chỉnh danh sách trên để đáp ứng yêu cầu này. Mỗi câu không dùng ML cần ít nhất 2 tiêu chí D1–D6; các câu không dùng ML cộng lại phải phủ ít nhất 4/6 tiêu chí. Câu ML thực hiện theo bộ yêu cầu riêng trong đề.
 
 ### Các điểm cần kiểm tra trước phân tích
 
@@ -108,9 +110,127 @@ Nhóm sẽ điều chỉnh để có **ít nhất số câu hỏi bằng số th
 
 ## 7. Tổ chức làm việc
 
-Notebook dự kiến gồm: thu thập dữ liệu, khám phá dữ liệu, đặt câu hỏi, tiền xử lý và phân tích từng câu hỏi, reflection, references. Các thành viên cần có đóng góp trên nhánh riêng và hiểu phần việc của nhau.
+Các thành viên cần có đóng góp trên Git và hiểu toàn bộ bài làm để trả lời Q&A. Bổ sung tên, MSSV và phân công thực tế vào bảng sau:
+
+| Thành viên | MSSV | Câu hỏi phụ trách | Công việc |
+| --- | --- | --- | --- |
+| Thành viên 1 — chưa điền | Chưa điền | Q1, Q2 (dự kiến) | Chưa phân công chi tiết |
+| Thành viên 2 — chưa điền | Chưa điền | Q3, Q4 (dự kiến) | Chưa phân công chi tiết |
 
 **Liên kết kế hoạch nhóm:** Chưa có; sẽ bổ sung Google Sheets/Trello khi nhóm thống nhất phân công, nhiệm vụ và thời gian.
+
+## 8. Cấu trúc repository và cách chạy
+
+```text
+MoviesDataset/
+├── README.md
+├── environment.yml
+├── conda-linux-64.lock                    # khóa phiên bản và build cho Ubuntu x86_64
+├── LLM_USAGE.md
+├── data/
+│   ├── raw/
+│   │   └── TMDB  IMDB Movies Dataset.csv  # tải riêng, không commit
+│   └── processed/                       # dữ liệu sau xử lý, không commit
+├── src/                                 # các hàm Python dùng chung
+│   └── __init__.py
+└── docs/
+    └── CSC17104_2026_Final_Project.pdf
+```
+
+Notebook và slides chưa được tạo. Khi triển khai, nhóm tự tạo `notebooks/01_collection_exploration.ipynb`, `notebooks/02_analysis.ipynb`, `notebooks/03_ml_question.ipynb` và xuất bài thuyết trình cuối cùng thành `slides.pdf` theo đề.
+
+### Thiết lập Miniconda trên Ubuntu
+
+`environment.yml` ghim phiên bản Python và các thư viện trực tiếp theo nhóm chức năng, có chú thích cho từng package. Bộ thư viện phục vụ dữ liệu bảng, làm sạch, EDA, thống kê, hồi quy/phân loại, cross-validation, Pipeline và diễn giải mô hình. Các mô hình tuyến tính, cây, random forest và gradient boosting đã có trong scikit-learn.
+
+Hai thành viên dùng **Miniconda trên Ubuntu**. Hướng dẫn chính dưới đây dành cho máy Intel/AMD 64-bit (`x86_64`), ví dụ Ubuntu 22.04/24.04. Miniconda có sẵn lệnh `conda`; không cần cài thêm Anaconda hoặc micromamba.
+
+**1. Kiểm tra Miniconda và kiến trúc máy**
+
+```bash
+conda --version
+uname -m
+```
+
+Nếu Bash chưa nhận lệnh `conda`, với Miniconda được cài ở vị trí mặc định:
+
+```bash
+source "$HOME/miniconda3/etc/profile.d/conda.sh"
+conda init bash
+```
+
+Sau đó mở terminal mới. Nếu dùng thư mục cài khác, sửa đường dẫn tương ứng; nếu dùng Zsh, thay `bash` bằng `zsh`. Nếu chưa có Miniconda, xem [hướng dẫn cài trên Linux của Conda](https://docs.conda.io/projects/conda/en/stable/user-guide/install/linux.html).
+
+**2. Mở repository**
+
+Nếu chưa clone:
+
+```bash
+git clone https://github.com/tranthuankhang/Movies-Dataset.git MoviesDataset
+cd MoviesDataset
+```
+
+Nếu đã clone, chỉ cần `cd` vào thư mục đang chứa `README.md` và `environment.yml`. Chạy các lệnh còn lại từ thư mục này.
+
+**3. Tạo môi trường dùng chung — chỉ làm một lần trên mỗi máy**
+
+Nếu `uname -m` trả về `x86_64`, cả hai thành viên dùng cùng file khóa:
+
+```bash
+conda create --name movies-dataset --file conda-linux-64.lock
+conda activate movies-dataset
+```
+
+`environment.yml` ghi 24 phiên bản thư viện trực tiếp và công dụng của chúng. `conda-linux-64.lock` khóa toàn bộ **260 gói**, gồm cả phụ thuộc gián tiếp, build và mã kiểm tra MD5. File khóa **có sử dụng** để hai máy Ubuntu x86_64 cài cùng bộ gói; bản khóa Windows đã được bỏ. Cách dùng explicit specification được mô tả trong [tài liệu Conda](https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-environments.html).
+
+Đã kiểm tra giải phụ thuộc cho `linux-64` với glibc 2.35 và kiểm tra đọc file khóa bằng dry-run. Chưa cài và chạy thử môi trường thực tế trên Ubuntu; hai thành viên thực hiện bước kiểm tra ở mục 5 sau khi cài.
+
+Nếu máy dùng ARM (`uname -m` là `aarch64`), không dùng file khóa `linux-64`. Thay lệnh tạo môi trường ở trên bằng:
+
+```bash
+conda env create -f environment.yml
+conda activate movies-dataset
+```
+
+YAML ghim các phiên bản trực tiếp, nhưng chưa có khóa hoặc kết quả kiểm tra cho ARM; phụ thuộc và build có thể khác. Khi cần môi trường giống nhau hoàn toàn, hai thành viên nên cùng dùng nền tảng `linux-64` đã có khóa. Chọn **một** cách tạo môi trường phù hợp, không chạy cả hai cách cho cùng tên môi trường.
+
+**4. Tải dữ liệu và đăng ký kernel**
+
+Tải CSV từ link Google Drive ở mục 2. Đặt tại `data/raw/TMDB  IMDB Movies Dataset.csv` (hai dấu cách giữa TMDB và IMDB). Ví dụ file vừa tải nằm trong `~/Downloads`:
+
+```bash
+mkdir -p data/raw data/processed
+mv "$HOME/Downloads/TMDB  IMDB Movies Dataset.csv" data/raw/
+python -m ipykernel install --user --name movies-dataset --display-name "Python (movies-dataset)"
+```
+
+Nếu CSV đã nằm đúng chỗ thì bỏ qua lệnh `mv`; điều chỉnh đường dẫn Downloads nếu máy dùng vị trí tải khác.
+
+**5. Kiểm tra môi trường và mở JupyterLab**
+
+```bash
+python --version
+python -c "import numpy, pandas, scipy, sklearn, matplotlib, seaborn, statsmodels, pyarrow, imblearn; print('Import OK'); print('pandas:', pandas.__version__); print('scikit-learn:', sklearn.__version__)"
+conda list
+jupyter lab
+```
+
+Python cần là **3.11.13**, pandas **2.2.3** và scikit-learn **1.6.1**. Trong JupyterLab hoặc VS Code, chọn kernel **Python (movies-dataset)**. Ví dụ đọc dữ liệu ở mục 2 giả định thư mục làm việc là gốc repository; nếu chạy từ `notebooks/`, điều chỉnh đường dẫn về `../data/raw/`. Khi các notebook đã được nhóm viết, chạy theo thứ tự **01 → 02 → 03**.
+
+**6. Những lần làm việc tiếp theo**
+
+Mở terminal tại thư mục repository rồi chạy:
+
+```bash
+conda activate movies-dataset
+jupyter lab
+```
+
+Kết thúc Jupyter bằng `Ctrl+C` trong terminal; thoát môi trường bằng `conda deactivate`.
+
+Khi cần đổi thư viện, nhóm thống nhất cập nhật YAML và file khóa cùng nhau; không tự nâng cấp riêng trên một máy. Từ môi trường đã cài và kiểm tra trên Ubuntu x86_64, có thể xuất lại khóa bằng `conda list --explicit --md5 > conda-linux-64.lock`. Thành viên còn lại tạo môi trường mới từ khóa đã cập nhật khi cần đồng bộ. Không đưa `prefix` hoặc đường dẫn môi trường cá nhân vào YAML. Phiên bản phần mềm giống nhau chưa bảo đảm kết quả ngẫu nhiên giống nhau: ghi cùng `random_state`, quy tắc chia dữ liệu và dùng cùng bản CSV khi triển khai.
+
+Trước khi nộp, nhóm bổ sung các câu hỏi đã chốt và người phụ trách, kết quả chính, các notebook công khai liên quan cùng điểm khác biệt của nhóm, reflection cá nhân và slides hoàn chỉnh. Duy trì nhật ký sử dụng LLM trong `LLM_USAGE.md`.
 
 ## Tài liệu tham khảo
 

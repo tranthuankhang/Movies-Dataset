@@ -1,0 +1,61 @@
+# Môi trường cho đồ án TMDB + IMDb; cập nhật ngày 05/11/2026.
+# Phạm vi: thu thập, đọc/làm sạch dữ liệu, EDA, thống kê, ML và Jupyter.
+# Đây là bộ phiên bản cố định cho nhóm, không phải yêu cầu dùng bản mới nhất.
+# Tất cả thư viện bên dưới đều ghim đủ phiên bản major.minor.patch.
+# Chỉ dùng conda-forge, không trộn thêm defaults hoặc cài đè bằng pip.
+#
+# Tạo môi trường từ cấu hình: conda env create -f environment.yml
+# Kích hoạt: conda activate movies-dataset
+# Ubuntu x86_64: dùng conda-linux-64.lock để đồng bộ cả phụ thuộc và build.
+# Cách dùng file khóa được ghi trong README.md.
+# Không tự nâng phiên bản riêng trên máy một thành viên; cập nhật chung qua Git.
+
+name: movies-dataset
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  # 1. Python và công cụ quản lý gói.
+  - python=3.11.13
+  - pip=25.1.1                  # có sẵn khi cần; hiện không có phụ thuộc pip riêng
+
+  # 2. Dữ liệu dạng bảng và tính toán số.
+  - numpy=2.2.6                # mảng, phép toán vector, lấy mẫu ngẫu nhiên
+  - pandas=2.2.3               # CSV, missing/duplicate, join, groupby, pivot, chuỗi/ngày
+  - pyarrow=20.0.0             # đọc/ghi Parquet, lưu dữ liệu trung gian hiệu quả
+  - openpyxl=3.1.5             # đọc/ghi .xlsx nếu bổ sung bảng dữ liệu hoặc xuất kết quả
+
+  # 3. EDA và biểu đồ dùng trong notebook, báo cáo, slides.
+  # matplotlib-base cung cấp matplotlib, không kéo thêm bộ GUI Qt.
+  - matplotlib-base=3.10.3     # histogram, scatter, subplot; xuất PNG/SVG/PDF
+  - seaborn=0.13.2             # biểu đồ phân phối, nhóm, heatmap và quan hệ giữa biến
+
+  # 4. Thống kê cho các tiêu chí D4–D6.
+  - scipy=1.15.2               # kiểm định, khoảng tin cậy, bootstrap, phân phối
+  - statsmodels=0.14.4         # hồi quy thống kê, kiểm soát biến, effect size, multiple tests
+
+  # 5. ML dạng bảng: baseline, hồi quy/phân loại, CV, Pipeline, metric, diễn giải.
+  - scikit-learn=1.6.1         # Dummy, linear/tree/forest/boosting; permutation importance
+  - imbalanced-learn=0.13.0    # sampler/Pipeline nếu câu phân loại có mất cân bằng lớp
+  - joblib=1.5.1               # lưu/nạp Pipeline và mô hình; xử lý song song
+  - threadpoolctl=3.6.0        # kiểm soát số luồng của thư viện tính toán
+
+  # 6. Thu thập dữ liệu và theo dõi xử lý CSV lớn (~282 MB trên đĩa).
+  - requests=2.32.4            # HTTP/API khi cần bổ sung dữ liệu từ nguồn hợp lệ
+  - tqdm=4.67.1               # thanh tiến trình cho chunks, vòng lặp hoặc tác vụ dài
+  - psutil=7.0.0               # theo dõi RAM/CPU, hỗ trợ chọn chunksize và n_jobs
+
+  # 7. Viết, chạy, kiểm tra định dạng và xuất notebook.
+  - jupyterlab=4.4.3           # giao diện JupyterLab
+  - notebook=7.4.3             # giao diện Jupyter Notebook nếu thành viên sử dụng
+  - ipykernel=6.29.5           # kernel Python của môi trường, dùng cả trong VS Code
+  - ipython=8.36.0             # shell tương tác và magic commands
+  - ipywidgets=8.1.7           # widget tương tác, hỗ trợ tqdm.notebook
+  - nbformat=5.10.4            # đọc/kiểm tra định dạng .ipynb
+  - nbconvert=7.16.6           # xuất notebook sang HTML, thực thi qua dòng lệnh
+
+# pathlib, csv, json, re, datetime, collections, itertools, logging, sqlite3
+# thuộc thư viện chuẩn Python: không cần cài package trùng tên.
+# Xuất PDF trực tiếp từ notebook có thể cần phần mềm hệ thống ngoài Conda;
+# xuất HTML bằng nbconvert rồi in PDF từ trình duyệt là một lựa chọn.
