@@ -12,9 +12,10 @@ Khám phá bản CSV nhóm tải từ Kaggle để hiểu mỗi dòng đại di�
 
 ## Trước khi bắt đầu
 
-1. Đọc [README mục 2](../../../README.md#2-tải-dữ-liệu) để lấy đúng bản CSV và [mục 8](../../../README.md#8-cấu-trúc-repository-và-cách-chạy) để thiết lập môi trường Conda, đăng ký kernel và mở JupyterLab.
-2. Đọc **mục 3.1 “Data collection” và mục 3.2 “Data exploration” (trang 2)** của [đề CSC17104 Final Project](../../CSC17104_2026_Final_Project.pdf). Dùng mục 3.1 để viết phần nguồn và bối cảnh, mục 3.2 để đối chiếu nội dung khám phá raw. Nếu dùng LLM hỗ trợ, đọc thêm mục 6 (trang 5) và ghi vào [nhật ký LLM](../../../LLM_USAGE.md) theo đề.
-3. Từ thư mục gốc repo, chạy `conda activate movies-dataset` rồi mở JupyterLab bằng `jupyter lab`. Tạo `notebooks/01_collection_exploration.ipynb` nếu chưa có và chọn kernel **Python (movies-dataset)**. Dùng môi trường này cho toàn bộ phần đọc CSV, khám phá và vẽ biểu đồ. Dùng đường dẫn tương đối đến CSV theo README để thành viên còn lại có thể chạy lại.
+1. Đọc **mục 3.1 “Data collection” và mục 3.2 “Data exploration” (trang 2)** của [đề CSC17104 Final Project](../../CSC17104_2026_Final_Project.pdf). Dùng mục 3.1 để viết phần nguồn và bối cảnh, mục 3.2 để đối chiếu nội dung khám phá raw. Nếu dùng LLM hỗ trợ, đọc thêm mục 6 (trang 5) và ghi vào [nhật ký LLM](../../../LLM_USAGE.md) theo đề.
+2. Làm theo bước 1–3 trong [README mục 8](../../../README.md#8-cấu-trúc-repository-và-cách-chạy) để cài Miniconda trên Ubuntu, clone repo nếu chưa có và mở terminal ở thư mục gốc repo. Lần đầu, chạy `conda env create -f environment.yml` để tạo môi trường, sau đó chạy `conda activate movies-dataset`.
+3. Tải CSV theo [README mục 2](../../../README.md#2-tải-dữ-liệu) và đặt vào `data/raw/` theo đường dẫn ở trên. Khi môi trường `movies-dataset` đang được kích hoạt, đăng ký kernel, kiểm tra các thư viện và mở JupyterLab theo bước 4–5 của README mục 8.
+4. Trong JupyterLab, tạo thư mục `notebooks/` nếu chưa có, tạo `01_collection_exploration.ipynb` trong thư mục đó và chọn kernel **Python (movies-dataset)**. Dùng kernel này để đọc CSV, khám phá và vẽ biểu đồ. Dùng đường dẫn tương đối đến CSV theo README để thành viên còn lại có thể chạy lại.
 
 ## Checklist
 
