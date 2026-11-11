@@ -75,7 +75,7 @@ Do dữ liệu được kết hợp từ nhiều nguồn, cần đồng thời l
 
 Chủ đề phim ảnh gần gũi và có nhiều câu hỏi thực tế để khám phá. Bộ dữ liệu có đủ quy mô yêu cầu, nhiều loại thuộc tính và đánh giá từ hai nền tảng, giúp nhóm nghiên cứu cả doanh thu lẫn sự đón nhận của khán giả. Các thông tin về thể loại, thời gian phát hành và người tham gia sản xuất còn hỗ trợ phân tích theo nhóm.
 
-Đối chiếu với yêu cầu **Final Project.pdf** và điều kiện quy mô của môn học:
+Đối chiếu với [đề Final Project](doc/CSC17104_2026_Final_Project.pdf) và điều kiện quy mô của môn học:
 
 | Yêu cầu | Cách triển khai với dataset |
 | --- | --- |
@@ -117,7 +117,7 @@ Các thành viên cần có đóng góp trên Git và hiểu toàn bộ bài là
 | Thành viên 1 — chưa điền | Chưa điền | Q1, Q2 (dự kiến) | Chưa phân công chi tiết |
 | Thành viên 2 — chưa điền | Chưa điền | Q3, Q4 (dự kiến) | Chưa phân công chi tiết |
 
-**Liên kết kế hoạch nhóm:** Chưa có; sẽ bổ sung Google Sheets/Trello khi nhóm thống nhất phân công, nhiệm vụ và thời gian.
+Xem [kế hoạch nhóm](doc/planning/PLAN.md) để theo dõi việc tiếp theo, phân công và bàn giao.
 
 ## 8. Cấu trúc repository và cách chạy
 
@@ -133,13 +133,17 @@ MoviesDataset/
 │   └── processed/                       # dữ liệu sau xử lý, không commit
 ├── src/                                 # các hàm Python dùng chung
 │   └── __init__.py
-└── docs/
-    └── CSC17104_2026_Final_Project.pdf
+└── doc/
+    ├── CSC17104_2026_Final_Project.pdf
+    └── planning/
+        └── PLAN.md
 ```
 
 Notebook và slides chưa được tạo. Khi triển khai, nhóm tự tạo `notebooks/01_collection_exploration.ipynb`, `notebooks/02_analysis.ipynb`, `notebooks/03_ml_question.ipynb` và xuất bài thuyết trình cuối cùng thành `slides.pdf` theo đề.
 
 ### Thiết lập Miniconda trên Ubuntu
+
+Chạy mọi notebook, script Python và ví dụ Python của dự án trong môi trường Conda `movies-dataset` được khai báo ở `environment.yml`. Khi làm việc từ terminal, kích hoạt bằng `conda activate movies-dataset` trước khi chạy Python hoặc mở JupyterLab. Khi tạo hoặc mở notebook trong JupyterLab hay VS Code, chọn kernel **Python (movies-dataset)** trước khi chạy cell.
 
 `environment.yml` ghim phiên bản Python và các thư viện trực tiếp theo nhóm chức năng, có chú thích cho từng package. Bộ thư viện phục vụ dữ liệu bảng, làm sạch, EDA, thống kê, hồi quy/phân loại, cross-validation, Pipeline và diễn giải mô hình. Các mô hình tuyến tính, cây, random forest và gradient boosting đã có trong scikit-learn.
 
@@ -239,4 +243,4 @@ Trước khi nộp, nhóm bổ sung các câu hỏi đã chốt và người ph�
 - [IMDb Non-Commercial Datasets](https://developer.imdb.com/non-commercial-datasets/).
 - [TMDB API FAQ](https://developer.themoviedb.org/docs/faq).
 - [Creative Commons CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-- **Final Project.pdf** — tài liệu yêu cầu đồ án do giảng viên cung cấp.
+- [Final Project](doc/CSC17104_2026_Final_Project.pdf) — tài liệu yêu cầu đồ án do giảng viên cung cấp.
