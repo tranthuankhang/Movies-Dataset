@@ -6,8 +6,6 @@
 #
 # Tạo môi trường từ cấu hình: conda env create -f environment.yml
 # Kích hoạt: conda activate movies-dataset
-# Ubuntu x86_64: dùng conda-linux-64.lock để đồng bộ cả phụ thuộc và build.
-# Cách dùng file khóa được ghi trong README.md.
 # Không tự nâng phiên bản riêng trên máy một thành viên; cập nhật chung qua Git.
 
 name: movies-dataset

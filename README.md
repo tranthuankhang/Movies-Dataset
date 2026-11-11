@@ -125,7 +125,6 @@ Xem [kế hoạch nhóm](doc/planning/PLAN.md) để theo dõi việc tiếp the
 MoviesDataset/
 ├── README.md
 ├── environment.yml
-├── conda-linux-64.lock                    # khóa phiên bản và build cho Ubuntu x86_64
 ├── LLM_USAGE.md
 ├── data/
 │   ├── raw/
@@ -178,25 +177,14 @@ Nếu đã clone, chỉ cần `cd` vào thư mục đang chứa `README.md` và 
 
 **3. Tạo môi trường dùng chung — chỉ làm một lần trên mỗi máy**
 
-Nếu `uname -m` trả về `x86_64`, cả hai thành viên dùng cùng file khóa:
-
-```bash
-conda create --name movies-dataset --file conda-linux-64.lock
-conda activate movies-dataset
-```
-
-`environment.yml` ghi 24 phiên bản thư viện trực tiếp và công dụng của chúng. `conda-linux-64.lock` khóa toàn bộ **260 gói**, gồm cả phụ thuộc gián tiếp, build và mã kiểm tra MD5. File khóa **có sử dụng** để hai máy Ubuntu x86_64 cài cùng bộ gói; bản khóa Windows đã được bỏ. Cách dùng explicit specification được mô tả trong [tài liệu Conda](https://docs.conda.io/projects/conda/en/stable/user-guide/tasks/manage-environments.html).
-
-Đã kiểm tra giải phụ thuộc cho `linux-64` với glibc 2.35 và kiểm tra đọc file khóa bằng dry-run. Chưa cài và chạy thử môi trường thực tế trên Ubuntu; hai thành viên thực hiện bước kiểm tra ở mục 5 sau khi cài.
-
-Nếu máy dùng ARM (`uname -m` là `aarch64`), không dùng file khóa `linux-64`. Thay lệnh tạo môi trường ở trên bằng:
+Từ thư mục gốc repository, tạo môi trường bằng `environment.yml` nếu máy chưa có `movies-dataset`.
 
 ```bash
 conda env create -f environment.yml
 conda activate movies-dataset
 ```
 
-YAML ghim các phiên bản trực tiếp, nhưng chưa có khóa hoặc kết quả kiểm tra cho ARM; phụ thuộc và build có thể khác. Khi cần môi trường giống nhau hoàn toàn, hai thành viên nên cùng dùng nền tảng `linux-64` đã có khóa. Chọn **một** cách tạo môi trường phù hợp, không chạy cả hai cách cho cùng tên môi trường.
+Nếu đã có môi trường `movies-dataset`, chạy `conda activate movies-dataset` và kiểm tra phiên bản ở bước 5. YAML ghim 24 gói trực tiếp. Conda tự chọn các phụ thuộc gián tiếp và build phù hợp trên từng máy.
 
 **4. Tải dữ liệu và đăng ký kernel**
 
@@ -232,7 +220,7 @@ jupyter lab
 
 Kết thúc Jupyter bằng `Ctrl+C` trong terminal; thoát môi trường bằng `conda deactivate`.
 
-Khi cần đổi thư viện, nhóm thống nhất cập nhật YAML và file khóa cùng nhau; không tự nâng cấp riêng trên một máy. Từ môi trường đã cài và kiểm tra trên Ubuntu x86_64, có thể xuất lại khóa bằng `conda list --explicit --md5 > conda-linux-64.lock`. Thành viên còn lại tạo môi trường mới từ khóa đã cập nhật khi cần đồng bộ. Không đưa `prefix` hoặc đường dẫn môi trường cá nhân vào YAML. Phiên bản phần mềm giống nhau chưa bảo đảm kết quả ngẫu nhiên giống nhau: ghi cùng `random_state`, quy tắc chia dữ liệu và dùng cùng bản CSV khi triển khai.
+Khi nhóm thống nhất đổi thư viện, cập nhật phiên bản trong `environment.yml` và dùng `conda env update -n movies-dataset -f environment.yml` để áp dụng trên mỗi máy. Dùng cùng bản CSV, quy tắc chia dữ liệu và giá trị `random_state` để kết quả có thể tái lập.
 
 Trước khi nộp, nhóm bổ sung các câu hỏi đã chốt và người phụ trách, kết quả chính, các notebook công khai liên quan cùng điểm khác biệt của nhóm, reflection cá nhân và slides hoàn chỉnh. Duy trì nhật ký sử dụng LLM trong `LLM_USAGE.md`.
 
