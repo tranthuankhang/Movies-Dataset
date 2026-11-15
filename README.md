@@ -87,7 +87,7 @@ Chủ đề phim ảnh gần gũi và có nhiều câu hỏi thực tế để k
 | Reflection và references | Tổng kết khó khăn, bài học và tài liệu tham khảo sau khi thực hiện |
 | Hợp tác bằng Git/GitHub | Quản lý notebook và tài liệu trên repo; các thành viên làm trên nhánh riêng và hợp nhất theo quy trình của đề |
 
-README giới thiệu dữ liệu và định hướng; các kết quả phân tích sẽ được trình bày trong notebook sau khi thực hiện.
+README giới thiệu dữ liệu và định hướng; kết quả khám phá raw đã có trong [notebook 01](notebooks/01_collection_exploration.ipynb). Các câu hỏi phân tích và ML chưa được chốt.
 
 ## 6. Câu hỏi phân tích dự kiến
 
@@ -132,13 +132,25 @@ MoviesDataset/
 │   └── processed/                       # dữ liệu sau xử lý, không commit
 ├── src/                                 # các hàm Python dùng chung
 │   └── __init__.py
+├── notebooks/
+│   └── 01_collection_exploration.ipynb   # đã chạy, có bảng và biểu đồ
 └── doc/
     ├── CSC17104_2026_Final_Project.pdf
     └── planning/
-        └── PLAN.md
+        ├── PLAN.md
+        └── data-exploration/
+            └── task.md
 ```
 
-Notebook và slides chưa được tạo. Khi triển khai, nhóm tự tạo `notebooks/01_collection_exploration.ipynb`, `notebooks/02_analysis.ipynb`, `notebooks/03_ml_question.ipynb` và xuất bài thuyết trình cuối cùng thành `slides.pdf` theo đề.
+Đã hoàn tất [notebook thu thập và khám phá](notebooks/01_collection_exploration.ipynb) ngày **15/11/2026**, gồm 13 cell code đã chạy và 5 hình. Các lựa chọn và điểm cần nhóm thống nhất được ghi trong [task khám phá](doc/planning/data-exploration/task.md). Notebook `02_analysis.ipynb`, `03_ml_question.ipynb` và `slides.pdf` chưa được tạo.
+
+Notebook 01 tự tìm thư mục gốc repository, giữ nguyên CSV và lưu bảng/biểu đồ trong file `.ipynb`. Khi đã kích hoạt `movies-dataset`, có thể chạy lại toàn bộ bằng:
+
+```bash
+PYTHONNOUSERSITE=1 python -m nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=300 notebooks/01_collection_exploration.ipynb
+```
+
+`PYTHONNOUSERSITE=1` tránh nạp lẫn thư viện Python cài riêng ngoài Conda. Trên PowerShell, đặt `$env:PYTHONNOUSERSITE = '1'` trước rồi chạy lệnh `python -m nbconvert ...` tương tự. Khi mở JupyterLab, có thể dùng `PYTHONNOUSERSITE=1 python -m jupyterlab` và chọn kernel **Python (movies-dataset)**.
 
 ### Thiết lập Miniconda trên Ubuntu
 
