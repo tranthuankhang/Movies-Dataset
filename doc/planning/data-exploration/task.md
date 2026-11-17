@@ -41,3 +41,13 @@ Tập trung vào các cột liên quan đến hướng câu hỏi trong README v
 - **Quyết định 3 — đã chọn A:** so sánh điểm trên mẫu hợp lệ có lượt ở cả hai nền tảng, rồi dùng ngưỡng 10/100/1.000 lượt. Số mẫu lần lượt **267.113 / 77.681 / 18.056 / 3.930**. Ưu: thấy độ nhạy. Nhược: các mẫu lồng nhau, thành phần phim thay đổi. Chênh lệch trung bình TMDB−IMDb đổi từ **−0,282** điểm ở mẫu có lượt thành **+0,066** điểm ở ngưỡng 1.000.
 - **Trước khi chốt câu hỏi:** nhóm thống nhất phạm vi phim điện ảnh/phim ngắn/truyền hình; có điều tra và gộp mã lặp để giữ thêm phim không; ngưỡng lượt chấm chính cho từng câu; cách kiểm chứng tài chính 0, cực trị và khác biệt qua thời gian. Các quyết định này thuộc bước phân tích tiếp theo, chưa áp dụng như quy tắc làm sạch chung.
 - **Bước tiếp theo:** chọn bốn câu hỏi trong `PLAN.md`, phân công hai câu mỗi thành viên và ít nhất một câu ML. Nhóm tự viết, rà soát phần phân tích bài nộp theo mục 6 của đề; phần hỗ trợ đã ghi trong `LLM_USAGE.md`.
+
+## Cập nhật ngày 17/11/2026
+
+- Đã điều chỉnh notebook 01 theo bốn câu hỏi tại [QUESTIONS.md](../../QUESTIONS.md), đối chiếu năm nhóm yêu cầu của mục 3.2 trong đề. Có bảng liên hệ câu hỏi–cột dữ liệu, bảng chất lượng và luồng lọc riêng cho từng câu, tám hình cùng năm quan sát cuối notebook.
+- Chạy lại từ đầu trong `movies-dataset` với **18 cell code và 8 hình**, không có lỗi hoặc cảnh báo trong output. Các kiểm tra số dòng, mẫu theo thời gian và SHA-256 nguồn đều đạt.
+- Q1 có **55.418 cặp** ở ngưỡng 10 lượt và **14.559 cặp** ở ngưỡng 100 trong phạm vi 1990–2024. Q2 có **363.368 tác phẩm trước 2020** và **45.267 tác phẩm 2020–2024**, với bảng độ đầy đủ đầu vào cho cả hai khoảng thời gian.
+- Q3 có **209.322 tác phẩm** trong mẫu sơ bộ, kèm thống kê thời lượng, số mẫu theo giai đoạn, thể loại và ngôn ngữ. Q4 có **8.049 tác phẩm**, kèm phân phối tài chính và bảng số mẫu theo thể loại–giai đoạn–nhóm ngân sách.
+- Đã đọc mô tả từ hai nguồn Kaggle nhưng chưa xác minh được đơn vị, phạm vi doanh thu và cách chuẩn hóa tài chính của bản v578. Notebook ghi nhãn giá trị CSV và nêu giới hạn này. Phân tích Q4 cần làm rõ thông tin tài chính trước khi diễn giải chênh lệch tiền tệ.
+- Bổ sung bảng so sánh cờ IQR với z-score `|z| > 3` dùng `ddof=0` trên cùng mẫu từng cột. Thêm heatmap Spearman tám cột trên **7.779 tác phẩm** thuộc mẫu Q4 có đủ giá trị hợp lệ, với số dòng sau từng bước lọc và cùng số tác phẩm cho mọi cặp hệ số.
+- Bước tiếp theo là tiền xử lý và phân tích Q1, Q3, Q4 trong notebook 02, xây dựng Pipeline và đánh giá mô hình Q2 trong notebook 03 theo phạm vi đã chốt.

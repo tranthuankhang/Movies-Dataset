@@ -87,18 +87,18 @@ Chủ đề phim ảnh gần gũi và có nhiều câu hỏi thực tế để k
 | Reflection và references | Tổng kết khó khăn, bài học và tài liệu tham khảo sau khi thực hiện |
 | Hợp tác bằng Git/GitHub | Quản lý notebook và tài liệu trên repo; các thành viên làm trên nhánh riêng và hợp nhất theo quy trình của đề |
 
-README giới thiệu dữ liệu và định hướng; kết quả khám phá raw đã có trong [notebook 01](notebooks/01_collection_exploration.ipynb). Các câu hỏi phân tích và ML chưa được chốt.
+README giới thiệu dữ liệu và định hướng. Bốn câu hỏi đã được chốt trong [QUESTIONS.md](doc/QUESTIONS.md). [Notebook 01](notebooks/01_collection_exploration.ipynb) khám phá raw và các mẫu phục vụ từng câu hỏi.
 
 ## 6. Câu hỏi phân tích dự kiến
 
 | Câu hỏi | Ý nghĩa và hướng thực hiện |
 | --- | --- |
-| Ngân sách có mối liên hệ thế nào với doanh thu và đánh giá khán giả? Mối liên hệ có khác theo thể loại hoặc giai đoạn không? | Xét các khía cạnh của sự thành công, lọc mẫu có dữ liệu phù hợp, phân nhóm và so sánh; không suy diễn tương quan thành quan hệ nhân quả |
-| Điểm TMDB và IMDb khác nhau như thế nào, và sự khác biệt có liên quan đến số lượt đánh giá hoặc thể loại không? | So sánh đánh giá giữa hai nền tảng trên cùng phim, xét ngưỡng số lượt chấm và độ ổn định của kết quả |
-| Cơ cấu thể loại và thời lượng phim thay đổi ra sao qua các giai đoạn? | Chuẩn hóa ngày, tạo biến thời gian, xử lý phim nhiều thể loại rồi so sánh phân phối |
-| Doanh thu và đánh giá khác nhau thế nào giữa các nhóm công ty sản xuất hoặc đạo diễn? | Chọn nhóm có đủ số phim, so sánh trong phạm vi ngân sách và giai đoạn tương đồng, tránh kết luận từ nhóm quá nhỏ |
+| Q1. IMDb và TMDB chấm điểm lệch nhau như thế nào? | Khang phụ trách. So sánh cặp điểm, xét thể loại và độ nhạy theo ngưỡng lượt chấm. |
+| Q2. Nhìn hồ sơ phim, đoán khán giả IMDb chấm mấy điểm? | Khang phụ trách, dùng ML. Dự đoán từ thể loại, thời lượng, ngôn ngữ gốc và năm phát hành, với cách chia tập theo thời gian. |
+| Q3. Phim có ngày càng dài hơn không? | Khánh phụ trách. So sánh thời lượng qua các giai đoạn, kiểm tra trong các nhóm thể loại và ngôn ngữ. |
+| Q4. Cùng mức ngân sách, thể loại phim nào thường có doanh thu cao hơn? | Khánh phụ trách. So sánh các nhóm có ngân sách, giai đoạn tương đồng sau khi xác minh thông tin tài chính của nguồn. |
 
-Các câu hỏi trên là hướng tham khảo, chưa phải danh sách đã chốt. Theo đề, nhóm **2 người cần 4 câu hỏi**, mỗi người phụ trách **2 câu**, trong đó **ít nhất 1 câu dùng ML**. Nhóm cần điều chỉnh danh sách trên để đáp ứng yêu cầu này. Mỗi câu không dùng ML cần ít nhất 2 tiêu chí D1–D6; các câu không dùng ML cộng lại phải phủ ít nhất 4/6 tiêu chí. Câu ML thực hiện theo bộ yêu cầu riêng trong đề.
+Động cơ, phạm vi dữ liệu, tiêu chí D và giới hạn của từng câu được ghi trong [QUESTIONS.md](doc/QUESTIONS.md). Nhóm có **3 câu non-ML và 1 câu ML**, mỗi người phụ trách **2 câu**. Các câu non-ML dự kiến sử dụng D2–D6, với ít nhất hai tiêu chí cho mỗi câu. Câu ML thực hiện theo bộ yêu cầu riêng trong đề.
 
 ### Các điểm cần kiểm tra trước phân tích
 
@@ -142,7 +142,7 @@ MoviesDataset/
             └── task.md
 ```
 
-Đã hoàn tất [notebook thu thập và khám phá](notebooks/01_collection_exploration.ipynb) ngày **15/11/2026**, gồm 13 cell code đã chạy và 5 hình. Các lựa chọn và điểm cần nhóm thống nhất được ghi trong [task khám phá](doc/planning/data-exploration/task.md). Notebook `02_analysis.ipynb`, `03_ml_question.ipynb` và `slides.pdf` chưa được tạo.
+Đã cập nhật [notebook thu thập và khám phá](notebooks/01_collection_exploration.ipynb) theo bốn câu hỏi ngày **17/11/2026**, gồm **18 cell code đã chạy và 8 hình**. Mẫu và hướng tiền xử lý của Q1–Q4 được ghi trong notebook cùng [task khám phá](doc/planning/data-exploration/task.md). Phân tích chi tiết dự kiến thực hiện trong `02_analysis.ipynb` và `03_ml_question.ipynb`.
 
 Notebook 01 tự tìm thư mục gốc repository, giữ nguyên CSV và lưu bảng/biểu đồ trong file `.ipynb`. Khi đã kích hoạt `movies-dataset`, có thể chạy lại toàn bộ bằng:
 
