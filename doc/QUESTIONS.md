@@ -31,9 +31,9 @@ Bảng dưới đây dùng phương án **3 câu non-ML và 1 câu ML** làm khu
 
 - **Câu hỏi** — Trên những phim có lượt chấm ở cả IMDb và TMDb, hai nền tảng chấm lệch nhau bao nhiêu, bên nào thường chấm cao hơn, và mức lệch có khác nhau giữa các thể loại không?
 - **Động cơ, người quan tâm và quyết định** — Người tổng hợp đánh giá phim có thể dùng kết quả để biết khi nào nên đối chiếu điểm ở cả hai nền tảng.
-- **Cột và phạm vi dữ liệu dự kiến** — Ghép cặp `vote_average` và `averageRating` trên cùng tác phẩm. Dùng `vote_count` và `numVotes` để đặt ngưỡng lượt chấm, `genres` để chia nhóm và `release_date` để giới hạn phạm vi phát hành 1990–2024. Dùng `id` và `tconst` để xử lý bản ghi trùng.
+- **Cột và phạm vi dữ liệu dự kiến** — Ghép cặp `vote_average` và `averageRating` trên cùng tác phẩm. Dùng `vote_count` và `numVotes` để đặt ngưỡng lượt chấm, `genres` để chia nhóm. Mẫu giữ trạng thái `Released` và yêu cầu `id`, `tconst` có giá trị và mỗi mã xuất hiện một lần trong CSV gốc. Chỉ giữ dòng có `release_date` đọc được và năm phát hành đến hết 2025, không đặt mốc năm bắt đầu.
 - **D3** — Tính chênh lệch `điểm TMDb − điểm IMDb` và trị tuyệt đối của chênh lệch. Tổng hợp trên toàn bộ mẫu rồi xem theo thể loại.
-- **D4** — Kiểm tra kết luận chung về mức lệch và bên chấm cao hơn có còn giữ trong từng thể loại. Khi so các thể loại, có thể xét trong cùng giai đoạn phát hành để giảm ảnh hưởng của sự khác nhau về năm phát hành.
+- **D4** — Kiểm tra kết luận chung về mức lệch và bên chấm cao hơn có còn giữ trong từng thể loại. Bảng theo thể loại chỉ dùng phần mẫu có nhãn.
 - **D5** — Ước lượng khoảng tin cậy 95% cho chênh lệch bằng bootstrap theo phim, giữ hai điểm của mỗi phim đi chung.
 - **D6** — So sánh kết quả khi yêu cầu ít nhất **10 lượt** và **100 lượt** ở cả hai nền tảng.
 
@@ -43,7 +43,7 @@ Bảng dưới đây dùng phương án **3 câu non-ML và 1 câu ML** làm khu
 - **Động cơ, người dùng và quyết định** — Người quản lý danh mục phim có thể dùng mô hình để xem hồ sơ phim cung cấp bao nhiêu thông tin về điểm khán giả IMDb khi chưa tra cứu điểm thực tế.
 - **Biến mục tiêu và thời điểm dự đoán** — Dự đoán `averageRating` khi đã có hồ sơ phim và chưa tra cứu điểm IMDb.
 - **Cột đầu vào** — `genres`, `runtime`, `original_language` và năm trích từ `release_date`. Loại điểm, lượt chấm và chỉ số phổ biến khỏi đầu vào để mô hình chỉ dùng thông tin hồ sơ đã nêu.
-- **Cách chia dữ liệu dự kiến** — Dùng các năm phát hành trước 2020 để huấn luyện và 2020–2024 để kiểm tra, sau khi xử lý bản ghi trùng.
+- **Phạm vi và cách chia dữ liệu dự kiến** — Sau khi xử lý bản ghi trùng, giữ các dòng có `status = 'Released'`, `release_date` đọc được và năm phát hành đến hết 2025. Dùng dữ liệu trước 2020 cho huấn luyện và validation theo từng lượt kiểm định chéo. Trong mỗi lượt, huấn luyện trên các năm sớm hơn và kiểm định trên một khoảng năm kế tiếp. Sau khi chọn mô hình, huấn luyện lại trên toàn bộ phần trước 2020. Các dòng từ 2020 đến hết 2025 dành cho lần kiểm tra cuối.
 - **Đánh giá** — Dùng MAE để đo sai số theo đơn vị điểm IMDb. So sánh ít nhất hai mô hình và một baseline, tiền xử lý trong `Pipeline`, tinh chỉnh bằng cross-validation trên tập huấn luyện và đánh giá tập kiểm tra một lần.
 - **Phân tích lỗi và diễn giải mô hình** — Kiểm tra mô hình sai nhiều ở nhóm phim hoặc khoảng điểm nào, rồi giải thích kết quả dựa trên những đặc điểm trong hồ sơ phim.
 
