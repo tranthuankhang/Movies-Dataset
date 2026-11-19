@@ -142,7 +142,7 @@ MoviesDataset/
             └── task.md
 ```
 
-Đã cập nhật [notebook thu thập và khám phá](notebooks/01_collection_exploration.ipynb) theo bốn câu hỏi ngày **17/11/2026**, gồm **18 cell code đã chạy và 8 hình**. Mẫu và hướng tiền xử lý của Q1–Q4 được ghi trong notebook cùng [task khám phá](doc/planning/data-exploration/task.md). Phân tích chi tiết dự kiến thực hiện trong `02_analysis.ipynb` và `03_ml_question.ipynb`.
+Đã cập nhật [notebook thu thập và khám phá](notebooks/01_collection_exploration.ipynb) ngày **19/11/2026**, gồm **63 cell code đã chạy và 8 hình**. Các mục từ 2 đến 7 được chia nhỏ, có lời giải thích cạnh bảng/hình và thu gọn code mặc định. Mẫu, số dòng sau từng bước lọc và hướng tiền xử lý Q1–Q4 nằm trong notebook. Phân tích chi tiết dự kiến thực hiện trong `02_analysis.ipynb` và `03_ml_question.ipynb`.
 
 Notebook 01 tự tìm thư mục gốc repository, giữ nguyên CSV và lưu bảng/biểu đồ trong file `.ipynb`. Khi đã kích hoạt `movies-dataset`, có thể chạy lại toàn bộ bằng:
 
